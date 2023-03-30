@@ -1,0 +1,86 @@
+minikube start --driver=virtualbox     --> to start minikube and set the driver as the user's choice of vm ( set --memory=4096 in case of error while creating deployment)
+
+
+minikube start --no-vtx-check         --> in case of vt-x and amd-v disabled error, run this command
+
+
+kubectl get nodes                     --> Get Status of Nodes
+
+
+minikube status                       --> status of minikube
+
+
+kubectl version --output=json         --> json output of both client and server version
+
+
+kubectl get pod                       --> get the pods currently running
+
+
+kubectl get services                  --> get the services running in minikube
+
+
+kubectl get pod/deployment/replicaset/all   --> gets the mentioned statuses.
+
+
+kubectl create deployment nginx-depl --image=nginx          --> Create a deployment which acts as abstraction layer for Replicaset which acts as abstraction for pods which further act as abstraction layer for containers
+
+
+
+kubectl edit deployment nginx-depl    --> edit the yaml file and save it, a new deployment is automatically created and the older one is terminated
+
+
+
+kubectl logs pod-name               -->  get the logs of the pod (can't get if the container hasn't been created yet)
+
+
+
+kubectl describe pod pod-name       -->  get the metadata on the pod and also the events
+
+
+
+kubectl exec -it mongo-depl-5ccf565747-74fsb -- bin/bash    -->   mongodb terminal of the container (exit -> to exit the terminal)
+
+
+
+kubectl delete deployment depl-name    --> delete the deployment
+
+
+
+kubectl apply -f deployment-file.yaml  --> creating kubectl deployment using yaml config file. anytime you can change the config file and deploy again using the same command
+
+example for nginx-deployment.yaml -->
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.16
+        ports:
+        - containerPort: 80
+
+
+
+
+
+
+
+
+
+
+
+
+
